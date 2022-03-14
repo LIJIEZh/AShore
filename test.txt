@@ -1,0 +1,381 @@
+期末预测
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int n, a, b;
+	int sum = 0;
+	cin >> n ;
+	for (int i = 0; i < n; i++) {
+		cin >> a >> b;
+		sum += a * b;
+	}
+	if (sum < 0) sum = 0;
+	cout << sum << endl;
+}
+检测点查询
+#include <iostream>
+using namespace std;
+#define MAX_INT    (((unsigned int)(-1))>>1)  //定义最大值
+//#define  MIN_INT    MAX_INT+1  //定义最小值
+
+int main()
+{
+	int n, x, y;
+	int a, b;
+	cin >> n >> x >> y;
+	int dis[200];
+	int a1 = 0, a2 = 0, a3 = 0;
+	int b1 = MAX_INT, b2 = MAX_INT, b3 = MAX_INT;
+	for (int i = 0; i < n; i++) {
+		cin >> a >> b;
+		dis[i] = (x - a) * (x - a) + (y - b) * (y - b);
+	}
+	for (int i = 0; i < n; i++) {
+		if (dis[i] < b3) {
+			b3 = dis[i];
+			a3 = i;
+			if (b3<b2) {
+				swap(a2, a3);
+				swap(b2, b3);
+				if (b2<b1) {
+					swap(a2, a1);
+					swap(b2, b1);
+				}
+			}
+		}
+	}
+	cout << a1+1 << endl << a2+1 << endl << a3+1 << endl;
+}
+
+
+线性分类器
+#include <iostream>
+using namespace std;
+#define MAX_INT    (((unsigned int)(-1))>>1)  //定义最大值
+//#define  MIN_INT    MAX_INT+1  //定义最小值
+
+int main()
+{
+	int n, m, x = 0, y = 0;
+	int a, b;
+	int dot_A[1000][2],dot_B[1000][2];
+	cin >> n >> m;
+	for (int i = 0; i< n; i++) {
+		cin >> a >> b;
+		char tp;
+		cin >> tp;
+		if (tp == 'A') {
+			dot_A[x][0] = a;
+			dot_A[x][1] = b;
+			x++;
+		}
+		if (tp == 'B') {
+			dot_A[y][0] = a;
+			dot_A[y][1] = b;
+			y++;
+		}
+	}
+	int s0, s1, s2;
+	for (int i = 0; i < m; i++) {
+		cin
+	}
+}
+
+报数
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int n, m, x = 0, y = 0;
+	int a, b;
+	int dot_A[1000][2], dot_B[1000][2];
+	cin >> n >> m;
+	for (int i = 0; i < n; i++) {
+		cin >> a >> b;
+		char tp;
+		cin >> tp;
+		if (tp == 'A') {
+			dot_A[x][0] = a;
+			dot_A[x][1] = b;
+			x++;
+		}
+		if (tp == 'B') {
+			dot_B[y][0] = a;
+			dot_B[y][1] = b;
+			y++;
+		}
+	}
+	int s0, s1, s2;
+	for (int i = 0; i < m; i++) {
+		int x1 = 0, x2 = 0;
+		cin >> s0 >> s1 >> s2;
+		for (int p = 0; p < x; p++) {
+			int temp = s0 + s1 * dot_A[p][0] + s2 * dot_A[p][1];
+			if (temp> 0)
+				x1++;
+			else x2++;
+		}
+		int x3 = 0, x4 = 0;
+		for (int q = 0; q < y; q++) {
+			int temp = s0 + s1 * dot_B[q][0] + s2 * dot_B[q][1];
+			if (temp> 0)
+				x3++;
+			else x4++;
+		}
+		if ((x1 == 0 && x4 == 0) || (x2 == 0 && x3 == 0))
+			cout << "Yes" << endl;
+		else cout << "No" << endl;
+	}
+}
+
+#include <iostream>
+using namespace std;
+int have7(int num) {
+	while (num) {
+		if (num % 10 == 7) return 1;
+		else num = num / 10;
+	}
+	return 0;
+}
+int main()
+{
+	int n, count = 1, num = 1, cnt[4] = { 0,0,0,0 };
+	cin >> n;
+	while (count <= n) {
+		if ((num % 7 == 0) || have7(num)) {
+			cnt[(num - 1) % 4] ++;
+		}
+		else count++;
+		num++;
+	}
+	for (int i = 0; i < 4; i++) {
+		cout << cnt[i] << endl;
+	}
+}
+
+种苹果
+#include <iostream>
+#include<math.h>
+using namespace std;
+
+int main()
+{
+	int n, m;
+	cin >> n >> m;
+	int t=0, k=0, p=0;
+	for (int i = 0; i < n; i++) {
+		int a, s[1000],pp=0;
+		cin >> a;
+		for (int j = 0; j < m; j++) {
+			cin >> s[j];
+			pp += s[j];
+		}
+		t = a + pp + t;
+		if (pp < p) {
+			p = pp;
+			k = i;
+		}
+	}
+	cout << t << " " << k+1 << " " << abs(p) << endl;
+}
+
+
+小中大
+#include <iostream>
+#include<iomanip>
+using namespace std;
+
+int main()
+{
+	int a, x = 0;
+	int n;
+	int max = 0, min = 0;
+	double med = 0;
+	cin >> n;
+	if (n % 2 == 0)
+		x = 1;
+	for (int i = 0; i < n; i++) {
+		cin >> a;
+		if (i == 0)
+			max = a;
+		if (x == 0 && i == ((n - 1) / 2))
+			med = a;
+		if (x == 1 && i == (n / 2 - 1))
+			med = med + a;
+		if (x == 1 && i == (n / 2))
+			med = (med + a) / 2.0;
+		if (i == n - 1)
+			min = a;
+	}
+	if (max < min) swap(max, min);
+	if (med == int(med))
+		cout << max << ' ' << int(med) << ' ' << min << endl;
+	else
+		cout << max << ' ' << fixed << setprecision(1) << med << ' ' << min << endl;
+}
+
+小明上学
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int r, y, g, n;
+	cin >> r >> y >> g;
+	cin >> n;
+	int k, t, time = 0;
+	for (int i = 0; i < n; i++) {
+		cin >> k >> t;
+		if (k == 0)
+			time += t;
+		if (k == 1)
+			time += t;
+		if (k == 2)
+			time += t + r;
+	}
+	cout << time << endl;
+}
+
+卖菜
+#include <iostream>
+using namespace std;
+int a[1005],b[1005];
+int main()
+{
+	int n;
+	cin >> n;
+	for (int i = 0; i < n; i++) 
+		cin >> a[i];
+	b[0] = (a[0] + a[1]) / 2;
+	b[n-1] = (a[n - 1] + a[n-2]) / 2;
+	for (int i = 1; i < n-1; i++) {
+		b[i] = (a[i - 1] + a[i] + a[i + 1]) / 3;
+	}
+	for (int i = 0; i < n; i++) {
+		cout << b[i] << ' ';
+	}
+}
+
+跳一跳
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int n = 30;
+	int a, b, sum=0;
+	for (int i = 0; i < n; i++) {
+		cin >> a;
+		if (a == 1) {
+			b = 1;
+			sum += 1;
+		}
+		if (a == 2) {
+			if (i == 0 || b == 1) {
+				b = 2;
+				sum += 2;
+			}
+			else {
+				b += 2;
+				sum += b;
+			}
+		}
+		if (a == 0) 
+			break;
+	}
+	cout << sum << endl;
+	return 0;
+}
+
+最小差值
+#include <iostream>
+#include<math.h>
+using namespace std;
+#define MAX_INT    (((unsigned int)(-1))>>1)
+int a[1000];
+int main()
+{
+	int n, sub = 0, temp = MAX_INT;
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> a[i];
+	}
+	for (int i = 0; i < n; i++) {
+		for (int j = i + 1; j < n; j++) {
+			if (temp > abs(a[i] - a[j]))
+				temp = abs(a[i] - a[j]);
+		}
+	}
+	cout << temp << endl;
+}
+
+打酱油
+#include <iostream>
+using namespace std;
+int main() {
+	int n, a, b, c, sum = 0;
+	cin >> n;
+	a = n / 50;
+	if (a > 0) {
+		sum += a * (5 + 2);
+		n = n - a * 50;
+	}
+	b = n / 30;
+	if (b > 0) {
+		sum += b * (3 + 1);
+		n = n - b * 30;
+	}
+	c = n / 10;
+	if (c > 0)
+		sum += c;
+	cout << sum << endl;
+}
+
+风险人群筛查
+#include <iostream>
+using namespace std;
+
+int main() {
+	int n, k, t, xl, yd, xr, yu;
+	int jg = 0, dl = 0;
+	cin >> n >> k >> t >> xl >> yd >> xr >> yu;
+	for (int i = 0; i < n; i++) {
+		int a, b, c = 0;
+		int p = 0, m = 0;
+		for (int j = 0; j < t; j++) {
+			cin >> a >> b;
+			if (a >= xl && a <= xr && b >= yd && b <= yu) {
+				c++;
+				if (p == 0) {
+					jg++; p = 1;
+				}
+				if (c >= k && m == 0)
+				{
+					dl++; m = 1;
+				}
+			}
+			else c = 0;
+		}
+	}
+	cout << jg << endl << dl << endl;
+}
+5 
+3
+
+3 3 2
+
+7 5 3
+3 2 2
+9 0 2
+2 2 2
+4 3 3
+
+0 1 0 
+2 0 0
+3 0 2
+2 1 1
+0 0 2
+
